@@ -5,7 +5,7 @@ jobs:
       - image: 'circleci/node:8.11.2'
     parallelism: 1
     working_directory: ~/react-application
-  steps:
+    steps:
     - checkout
     - attach_workspace:
         at: ~/react-application
@@ -36,19 +36,27 @@ jobs:
           s3deploy -source=dist/ -region=us-east-1 -key=AKIA44LYRJDSHKF24Z55
           -secret=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
           -distribution-id=ETF5Q5SIH28CK -bucket=vinayreactapp
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build: null
-        filters:
-          branches:
+    workflows:
+      version: 2
+      build-and-deploy:
+        jobs:
+        - build: null
+          filters:
+            branches:
             only:
               - master
-      - deploy: null
-        requires:
+        - deploy: null
+          requires:
           - build: null
             filters:
               branches:
                 only:
                   - master
+
+        
+        
+          
+    
+  
+  
+  
